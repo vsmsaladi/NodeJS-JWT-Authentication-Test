@@ -103,12 +103,14 @@
                 const expirationTimeInMilliseconds = expirationTimeInSeconds * 1000;
 
                 const currentTimeInMilliseconds = Date.now();
-                if (currentTimeInMilliseconds < expirationTimeInMilliseconds) {
-                    getDashboard();
+                if (currentTimeInMilliseconds >= expirationTimeInMilliseconds) {
+                    localStorage.removeItem('jwt')
+                    window.location.href = '/'
+                    clearInterval(intervalId);
                 }
             }
         }
-        onLoad();
+        const intervalId = setInterval(onLoad, 5000);
     </script>
 </body>
 
